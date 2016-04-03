@@ -1,0 +1,259 @@
+// Dota Heroes File
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+	//=================================================================================================================
+	// Templar Assassin: Refraction Holdout
+	//=================================================================================================================
+	"templar_assassin_refraction_holdout"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"17.0 17.0 17.0 17.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_absorb"				"200 300 400 500"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage"				"20 40 60 80"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"17.0 17.0 17.0 17.0"
+			}
+		}
+	}
+
+	//Flag Knock ability
+	"flag_cannon"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"             			"ability_datadriven"
+		"AbilityBehavior"					"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL"
+		"AbilityTextureName"   				 "flag_cannon"
+
+		// Cost & CD
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"					"10"
+		"AbilityCooldown"					"3"
+
+		// Ability
+		//-------------------------------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{
+				"Target" 					"POINT"
+				"EffectName"				"particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow.vpcf"
+				"MoveSpeed"					"800"
+				"StartRadius"				"100"
+				"EndRadius"					"100"
+				"StartPosition"				"attach_attack1"
+				"FixedDistance"				"3000"
+				"TargetTeams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"				"DOTA_UNIT_TARGET_HERO"
+				"TargetFlags"				"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"			"0"
+				"ProvidesVision"			"1"
+				"VisionRadius"				"600"
+
+			}
+		}
+
+		"OnProjectileHitUnit"
+		{
+			"RunScript"
+			{
+				"ScriptFile"				"scripts/vscripts/ctf_abilities.lua"
+				"Function"					"HitByProjectile"
+			}
+		}
+
+		// Precache
+		//--------------------------------------------------------------------------------------------------------------
+		"precache"
+  		{
+        	"particle" "particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow.vpcf"
+    	}
+
+    	
+	}
+
+	"gotta_go_fast"
+	{
+	    // General
+	    //-------------------------------------------------------------------------------------------------------------
+	    "BaseClass"              "ability_datadriven"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityTextureName"     "gotta_go_fast"
+
+		// Cost & CD
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"					"10"
+		"AbilityCooldown"					"30"
+
+		"Precache"
+		{
+			"particle"					"particles/units/heroes/hero_ogre_magi/ogre_magi_ignite_debuff_d.vpcf"
+		}
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target"	"CASTER"
+				"ModifierName"	"going_too_fast"
+			}
+			"ApplyModifier"
+			{
+				"Target"	"CASTER"
+				"ModifierName"	"speedy_effect"
+			}
+		}
+
+	    "Modifiers"
+	    {
+	    	"going_too_fast"
+	    	{
+	    		"IsHidden"				"0"
+	    		"Duration"				"%duration"
+	            "ThinkInterval"			"1"
+	            "OnIntervalThink"
+	            {
+	            	"Random"
+	            	{
+	            		"Chance" "%chance"
+	            		"OnSuccess"
+	            		{
+							"RunScript"
+							{
+								"ScriptFile"				"scripts/vscripts/ctf_abilities.lua"
+								"Function"					"DropRandomItem"
+								"no_item_health_loss"		"%no_item_health_loss"
+							}
+	            		}
+	            	}
+	                "Damage"
+	                {
+	                    "Type"   "DAMAGE_TYPE_PHYSICAL"
+	                    "Damage" "%damage"
+	                    "Target" "TARGET"
+	                }
+	            }
+	            "OnDestroy"
+	            {
+	            	"RemoveModifier"
+	            	{
+	            		"Target"		"CASTER"
+	            		"ModifierName"	"speedy_effect"
+	            	}
+	            }
+
+	            "Properties"
+			    {
+		       		"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%move_speed_percentage_bonus"
+			    }
+	    	}
+
+	    	"speedy_effect"
+	    	{
+	    		"IsHidden"	"1"
+				"EffectName" 			"particles/units/heroes/hero_ogre_magi/ogre_magi_ignite_debuff_d.vpcf"
+				"EffectAttachType" 		"follow_overhead"
+
+	    	}
+	    }
+	    // Special    
+	    //-------------------------------------------------------------------------------------------------------------
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"                "FIELD_FLOAT"
+	            "duration"                "16.0"
+	        }
+	        "02"
+	        {
+	            "var_type"              "FIELD_INTEGER"
+	            "chance"                "30"
+	        }
+	        "03"
+	        {
+	        	"var_type"				"FIELD_INTEGER"
+	        	"move_speed_percentage_bonus"	"90"
+	        }
+	        "04"
+	        {
+	        	"var_type"				"FIELD_INTEGER"
+	        	"no_item_health_loss"	"20"
+	        }
+	    }
+	}
+
+	"decoy_flag"
+	{
+		// General
+	    //-------------------------------------------------------------------------------------------------------------
+	    "BaseClass"              "ability_datadriven"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityTextureName"     "decoy_flag"
+
+		// Cost & CD
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"					"100"
+		"AbilityCooldown"					"30"
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target"			"CASTER"
+				"ModifierName"		"knockback_invulnerable"
+			}
+		}
+
+	    "Modifiers"
+	    {
+	    	"knockback_invulnerable"
+	    	{
+	    		"IsHidden"				"0"
+	    		"Duration"				"%duration"
+	    	}
+	    }
+
+	    // Special    
+	    //-------------------------------------------------------------------------------------------------------------
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"                "FIELD_FLOAT"
+	            "duration"				  "10"
+	        }
+	    }
+	}
+}

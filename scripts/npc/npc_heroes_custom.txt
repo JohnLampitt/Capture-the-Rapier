@@ -1,0 +1,72 @@
+// Dota Heroes File
+// NOTE: This is not for creating new heroes, this is for taking a currently existing hero as a template and overriding
+// the specified key-value combinations.  Use override_hero <hero_to_override> for this.
+"DOTAHeroes"
+{
+	//=================================================================================================================
+	// HERO: Templar Assassin
+	//=================================================================================================================
+	"npc_dota_hero_templar_assassin_template"
+	{
+		"override_hero"				"npc_dota_hero_templar_assassin"			// Hero to override
+		"Ability1"					"flag_cannon"		// Ability 1
+		"Ability2"					"gotta_go_fast"
+		"Ability3"					"decoy_flag"
+	}
+
+	"npc_dota_hero_abaddon_template"
+	{
+		"override_hero"				"npc_dota_hero_abaddon"			// Hero to override
+		"Ability1"					"flag_cannon"		// Ability 1
+		"Ability2"					"gotta_go_fast"
+		"Ability3"					"decoy_flag"
+	}
+
+	"npc_dota_hero_alchemist_template"
+	{
+		"override_hero"				"npc_dota_hero_alchemist"			// Hero to override
+		"Ability1"					"flag_cannon"		// Ability 1
+		"Ability2"					"gotta_go_fast"
+		"Ability3"					"decoy_flag"
+	}
+
+	"npc_dota_hero_brewmaster_template"
+	{
+		"override_hero"				"npc_dota_hero_brewmaster"			// Hero to override
+		"Ability1"					"flag_cannon"		// Ability 1
+		"Ability2"					"gotta_go_fast"
+		"Ability3"					"decoy_flag"
+	}
+
+	"npc_dota_hero_ancient_apparition_template"
+	{
+		"override_hero"				"npc_dota_hero_ancient_apparition"			// Hero to override
+		"Ability1"					"flag_cannon"		// Ability 1
+		"Ability2"					"gotta_go_fast"
+		"Ability3"					"decoy_flag"
+	}
+
+	"npc_dota_hero_centaur_template"
+	{
+		"override_hero"				"npc_dota_hero_centaur"			// Hero to override
+		"Ability1"					"flag_cannon"		// Ability 1
+		"Ability2"					"gotta_go_fast"
+		"Ability3"					"decoy_flag"
+	}
+
+	"npc_dota_hero_chaos_knight_template"
+	{
+		"override_hero"				"npc_dota_hero_chaos_knight"			// Hero to override
+		"Ability1"					"flag_cannon"		// Ability 1
+		"Ability2"					"gotta_go_fast"
+		"Ability3"					"decoy_flag"
+	}
+
+	"npc_dota_hero_earthshaker_template"
+	{
+		"override_hero"				"npc_dota_hero_earthshaker"			// Hero to override
+		"Ability1"					"flag_cannon"		// Ability 1
+		"Ability2"					"gotta_go_fast"
+		"Ability3"					"decoy_flag"
+	}
+}
